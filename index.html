@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pocketlens — Spend with purpose</title>
+  <title>Pocketlens - Spend with purpose</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon16.png" />
+  <link rel="shortcut icon" href="assets/icon48.png" />
   <meta name="description" content="Pocketlens automatically tracks every online purchase and intervenes before impulse becomes regret. No bank connection. No account. Free." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -316,27 +319,15 @@
       width: 100%;
       aspect-ratio: 16/10;
       background: var(--dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       border-bottom: 1px solid var(--border);
+      overflow: hidden;
     }
 
-    .feature-card__placeholder {
-      text-align: center;
-    }
-
-    .feature-card__placeholder .icon {
-      font-size: 32px;
-      margin-bottom: 8px;
+    .feature-card__screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
-    }
-
-    .feature-card__placeholder p {
-      font-family: var(--font);
-      font-size: 11px;
-      color: var(--border-dark);
-      font-weight: 600;
     }
 
     .feature-card__body { padding: 24px; }
@@ -648,13 +639,13 @@
       target="_blank"
       rel="noopener"
     >
-      Add to Chrome — Free
+      Add to Chrome - Free
     </a>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <p class="hero__eyebrow">Chrome Extension — Free</p>
+    <p class="hero__eyebrow">Chrome Extension - Free</p>
     <h1 class="hero__headline">
       Stop spending money<br />you'll <em>regret.</em>
     </h1>
@@ -666,12 +657,13 @@
     <div class="hero__actions">
       <a
         href="https://chromewebstore.google.com/detail/pocketlens/YOUR_EXTENSION_ID"
-        class="btn-primary"
-        target="_blank"
-        rel="noopener"
-      >
-        🔍 Add to Chrome — It's Free
-      </a>
+          class="btn-primary"
+          target="_blank"
+          rel="noopener"
+        >
+          <img src="assets/icon48.png" alt="" style="width: 18px; height: 18px; border-radius: 4px;" />
+          Add to Chrome - It's Free
+        </a>
       <a href="#how-it-works" class="btn-secondary">
         See how it works ↓
       </a>
@@ -704,72 +696,66 @@
     </p>
   </section>
 
-  <!-- FEATURES — off-white -->
-  <section class="features" id="how-it-works">
-    <p class="features__label">How it works</p>
-    <h2 class="features__headline">
-      Three things nobody else does.
-    </h2>
-    <div class="features__grid">
+<!-- FEATURES — off-white -->
+<section class="features" id="how-it-works">
+  <p class="features__label">How it works</p>
+  <h2 class="features__headline">
+    Three things nobody else does.
+  </h2>
+  <div class="features__grid">
 
-      <div class="feature-card">
-        <div class="feature-card__screenshot">
-          <div class="feature-card__placeholder">
-            <span class="icon">📦</span>
-            <p>Screenshot coming soon</p>
-          </div>
-        </div>
-        <div class="feature-card__body">
-          <p class="feature-card__tag">01 — Detection</p>
-          <h3 class="feature-card__title">Every purchase. Automatic.</h3>
-          <p class="feature-card__desc">
-            The moment your order confirms Pocketlens logs it,
-            updates your remaining budget, and asks how you feel
-            about it. No manual entry. No bank connection.
-            Just awareness.
-          </p>
-        </div>
+    <div class="feature-card">
+      <div class="feature-card__screenshot">
+        <img src="assets/feature-detection.png" alt="Pocketlens detecting a purchase automatically" loading="lazy" />
       </div>
-
-      <div class="feature-card">
-        <div class="feature-card__screenshot">
-          <div class="feature-card__placeholder">
-            <span class="icon">⏱</span>
-            <p>Screenshot coming soon</p>
-          </div>
-        </div>
-        <div class="feature-card__body">
-          <p class="feature-card__tag">02 — Intervention</p>
-          <h3 class="feature-card__title">30 seconds before you spend.</h3>
-          <p class="feature-card__desc">
-            Sit on a checkout page for 30 seconds and Pocketlens
-            asks one question: still sure? Research shows a brief
-            pause eliminates most impulse purchases.
-            That pause is now built in.
-          </p>
-        </div>
+      <div class="feature-card__body">
+        <p class="feature-card__tag">01 — Detection</p>
+        <h3 class="feature-card__title">Catches purchases - and how you felt about them.</h3>
+        <p class="feature-card__desc">
+          The moment your order confirms on a supported
+          retailer, Pocketlens logs it, updates your
+          remaining budget, and asks you to tag how you
+          feel about it - good, necessary, or regret.
+          No manual entry. No bank connection.
+        </p>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-card__screenshot">
-          <div class="feature-card__placeholder">
-            <span class="icon">🧠</span>
-            <p>Screenshot coming soon</p>
-          </div>
-        </div>
-        <div class="feature-card__body">
-          <p class="feature-card__tag">03 — Awareness</p>
-          <h3 class="feature-card__title">Tag every purchase. Learn your patterns.</h3>
-          <p class="feature-card__desc">
-            Good purchase. Necessary. Regret. Tag how you feel
-            after every buy. Over time Pocketlens shows you exactly
-            when and where your money disappears — and why.
-          </p>
-        </div>
-      </div>
-
     </div>
-  </section>
+
+    <div class="feature-card">
+      <div class="feature-card__screenshot">
+        <img src="assets/feature-intervention.png" alt="Pocketlens cooldown reminder on a checkout page" loading="lazy" />
+      </div>
+      <div class="feature-card__body">
+        <p class="feature-card__tag">02 — Intervention</p>
+        <h3 class="feature-card__title">A reminder, right when it matters.</h3>
+        <p class="feature-card__desc">
+          Add any site to your blocklist and Pocketlens
+          steps in the moment you land on it - a clear
+          reminder asking if you really need to shop right
+          now. Not a notification you can swipe away without
+          reading. Something you have to actually look at.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-card__screenshot">
+        <img src="assets/feature-awareness.png" alt="Pocketlens purchase history with mood tags" loading="lazy" />
+      </div>
+      <div class="feature-card__body">
+        <p class="feature-card__tag">03 — Cooldown</p>
+        <h3 class="feature-card__title">Thirty seconds before you spend.</h3>
+        <p class="feature-card__desc">
+          Sit on a checkout page for 30 seconds and
+          Pocketlens asks one simple question: still sure?
+          A short pause is often enough to break an impulse
+          purchase. That pause is now built into your browser.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- EMAIL CAPTURE — white -->
   <section class="capture">
