@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sorry to see you go — Pocketlens</title>
+  <meta name="description" content="Tell us why you uninstalled Pocketlens." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --dark:       #0f0f1a;
+      --dark-card:  #1a1a2e;
+      --off-white:  #f5f5f0;
+      --white:      #ffffff;
+      --teal:       #00A688;
+      --teal-dark:  #008f75;
+      --border:     #e0e0d8;
+      --border-dark:#2e2e4e;
+      --text:       #1a1a2e;
+      --muted:      #555555;
+      --faint:      #888888;
+      --faint-dark: #666688;
+      --header-text:#e8e4dc;
+      --error:      #e74c3c;
+      --font:       'Nunito', Georgia, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--off-white);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--dark);
+      border-bottom: 2px solid var(--teal);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav__logo { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0; }
+
+    .nav__tagline {
+      font-weight: 700;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--header-text);
+    }
+    .nav__tagline span { color: var(--teal); }
+
+    /* ── MAIN ────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      background: var(--off-white);
+      padding: 120px 24px 80px;
+      text-align: center;
+    }
+
+    .headline {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 800;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.15;
+      max-width: 780px;
+      margin: 0 auto 20px;
+      letter-spacing: -0.5px;
+    }
+    .headline em { color: var(--teal); font-style: italic; }
+
+    .sub {
+      font-size: 17px;
+      color: var(--text);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    /* ── FORM CARD ───────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 28px;
+      text-align: left;
+    }
+
+    fieldset { border: none; min-width: 0; }
+
+    legend {
+      font-size: 18px;
+      font-weight: 800;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 14px;
+      padding: 0;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1.4;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .option:hover { border-color: var(--teal); }
+
+    .option input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border: 2px solid var(--faint);
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+      display: grid;
+      place-content: center;
+    }
+    .option input[type="radio"]::before {
+      content: "";
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--teal);
+      transform: scale(0);
+      transition: transform 0.12s ease;
+    }
+    .option input[type="radio"]:checked { border-color: var(--teal); }
+    .option input[type="radio"]:checked::before { transform: scale(1); }
+    .option input[type="radio"]:focus-visible {
+      outline: 3px solid var(--dark);
+      outline-offset: 2px;
+    }
+    .option:has(input:checked) {
+      border-color: var(--teal);
+      background: #f0faf7;
+    }
+
+    .field { margin-top: 20px; }
+    .field[hidden] { display: none; }
+
+    .field label {
+      display: block;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    .field .optional { font-weight: 400; color: var(--faint); }
+
+    .field input[type="text"],
+    .field textarea {
+      width: 100%;
+      font-family: var(--font);
+      font-size: 16px; /* 16px prevents iOS zoom on focus */
+      color: var(--text);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .field textarea { resize: vertical; min-height: 96px; }
+    .field input[type="text"]:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0, 166, 136, 0.18);
+    }
+
+    .counter {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12px;
+      color: var(--faint);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* Honeypot: hidden from people, visible to bots */
+    .hp {
+      position: absolute;
+      left: -9999px;
+      width: 1px; height: 1px;
+      overflow: hidden;
+    }
+
+    .error {
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--error);
+      min-height: 1.2em;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 8px;
+      background: var(--teal);
+      color: var(--white);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
+    .btn-primary:focus-visible { outline: 3px solid var(--dark); outline-offset: 3px; }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .note {
+      margin: 24px auto 0;
+      max-width: 440px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── THANK-YOU STATE ─────────────────────────────────── */
+    #thanks[hidden], #formWrap[hidden] { display: none; }
+
+    .badge {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+    .badge svg { width: 30px; height: 30px; }
+
+    .close {
+      margin-top: 32px;
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 800;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      border-top: 2px solid var(--teal);
+      padding: 24px 40px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer__brand { display: flex; align-items: center; gap: 10px; }
+    .footer__logo { width: 22px; height: 22px; border-radius: 4px; flex-shrink: 0; }
+    .footer__tagline { font-weight: 700; font-style: italic; font-size: 13px; color: var(--header-text); }
+    .footer__center { text-align: center; }
+    .footer__link { font-weight: 600; font-size: 12px; color: var(--faint-dark); text-decoration: none; transition: color 0.2s; }
+    .footer__link:hover { color: var(--teal); text-decoration: none; }
+    .footer__right { display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+    .footer__copy { font-size: 11px; color: var(--border-dark); }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px; }
+      .nav__tagline { display: none; }
+      main { padding: 100px 16px 64px; }
+      .card { padding: 20px; }
+      footer { padding: 20px 24px; grid-template-columns: 1fr; gap: 12px; }
+      .footer__center { text-align: left; }
+      .footer__right { justify-content: flex-start; }
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      .headline, .sub, .card, .badge, .close {
+        animation: fadeUp 0.6s ease both;
+      }
+      .sub  { animation-delay: 0.1s; }
+      .card { animation-delay: 0.2s; }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <img src="assets/icon48.png" alt="Pocketlens" class="nav__logo" />
+    <span class="nav__tagline">
+      Spend with <span>purpose.</span>
+    </span>
+  </nav>
+
+  <main>
+
+    <!-- SURVEY -->
+    <div id="formWrap">
+      <h1 class="headline">Sorry to see <em>you go.</em></h1>
+      <p class="sub">
+        One quick question helps us fix what went wrong. It takes about
+        10 seconds and is anonymous.
+      </p>
+
+      <form class="card" id="surveyForm" novalidate>
+        <fieldset>
+          <legend>What was the main reason?</legend>
+
+          <label class="option"><input type="radio" name="reason" value="no_detection" /> It didn't detect my purchases</label>
+          <label class="option"><input type="radio" name="reason" value="checkout_pause" /> The checkout pause was annoying</label>
+          <label class="option"><input type="radio" name="reason" value="blocked_purchase" /> It blocked something I wanted to buy</label>
+          <label class="option"><input type="radio" name="reason" value="privacy" /> Privacy concerns</label>
+          <label class="option"><input type="radio" name="reason" value="plus_price" /> Plus is too expensive / not worth it</label>
+          <label class="option"><input type="radio" name="reason" value="other_tool" /> I found a different tool</label>
+          <label class="option"><input type="radio" name="reason" value="temporary" /> I only needed it temporarily</label>
+          <label class="option"><input type="radio" name="reason" value="other" /> Other</label>
+        </fieldset>
+
+        <div class="field" id="storeField" hidden>
+          <label for="store">Which store? <span class="optional">(optional)</span></label>
+          <input type="text" id="store" name="store" maxlength="100" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="comment">Anything else we should know? <span class="optional">(optional)</span></label>
+          <textarea id="comment" name="comment" maxlength="500"></textarea>
+          <div class="counter"><span id="commentCount">0</span>/500</div>
+        </div>
+
+        <!-- Honeypot: leave empty. Real visitors never see this. -->
+        <div class="hp" aria-hidden="true">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <p class="error" id="formError" role="alert" aria-live="polite"></p>
+
+        <button type="submit" class="btn-primary" id="submitBtn">Send feedback</button>
+      </form>
+
+      <p class="note">
+        Questions? Reach us at
+        <a href="mailto:hello@getpocketlens.com">hello@getpocketlens.com</a>.
+      </p>
+    </div>
+
+    <!-- THANK-YOU (shown after submit, no redirect) -->
+    <div id="thanks" hidden>
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="5 12.5 10 17.5 19 7.5" />
+        </svg>
+      </div>
+      <h1 class="headline">Thank <em>you.</em></h1>
+      <p class="sub">Your answer is in, and it will help us make Pocketlens better.</p>
+      <p class="close">You're good to close this tab.</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer__brand">
+      <img src="assets/icon48.png" alt="Pocketlens" class="footer__logo" />
+      <span class="footer__tagline">Spend with purpose. 🔍</span>
+    </div>
+    <div class="footer__center">
+      <a href="/privacy" class="footer__link">Privacy Policy</a>
+    </div>
+    <div class="footer__right">
+      <a href="mailto:hello@getpocketlens.com" class="footer__link">
+        hello@getpocketlens.com
+      </a>
+      <span class="footer__copy">© 2026 Pocketlens LLC</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById('surveyForm');
+      var storeField = document.getElementById('storeField');
+      var storeInput = document.getElementById('store');
+      var comment = document.getElementById('comment');
+      var commentCount = document.getElementById('commentCount');
+      var errorEl = document.getElementById('formError');
+      var submitBtn = document.getElementById('submitBtn');
+
+      // Version number from the URL (?v=1.2.3). Only digits and dots are
+      // accepted; anything else is ignored. The server validates it again.
+      var extVersion = null;
+      try {
+        var v = new URLSearchParams(window.location.search).get('v');
+        if (v && /^[0-9][0-9.]{0,19}$/.test(v)) extVersion = v;
+      } catch (e) {}
+
+      // Show "Which store?" only for reason 1.
+      form.addEventListener('change', function (e) {
+        if (e.target.name !== 'reason') return;
+        var isDetection = e.target.value === 'no_detection';
+        storeField.hidden = !isDetection;
+        if (!isDetection) storeInput.value = '';
+        errorEl.textContent = '';
+      });
+
+      comment.addEventListener('input', function () {
+        commentCount.textContent = comment.value.length;
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorEl.textContent = '';
+
+        var picked = form.querySelector('input[name="reason"]:checked');
+        if (!picked) {
+          errorEl.textContent = 'Please pick a reason so we know what to fix.';
+          return;
+        }
+
+        var payload = {
+          reason: picked.value,
+          store: storeInput.value.trim().slice(0, 100),
+          comment: comment.value.trim().slice(0, 500),
+          ext_version: extVersion,
+          website: document.getElementById('website').value // honeypot
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        fetch('https://pocketlens-backend-production.up.railway.app/uninstall/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (res) {
+            if (res.ok) {
+              document.getElementById('formWrap').hidden = true;
+              document.getElementById('thanks').hidden = false;
+              window.scrollTo(0, 0);
+              return;
+            }
+            if (res.status === 429) {
+              throw new Error('Too many submissions. Please try again in a few minutes.');
+            }
+            throw new Error('Something went wrong. Please try again.');
+          })
+          .catch(function (err) {
+            errorEl.textContent = err.message === 'Failed to fetch'
+              ? 'Could not reach the server. Please try again.'
+              : err.message;
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send feedback';
+          });
+      });
+    })();
+  </script>
+
+</body>
+</html>
