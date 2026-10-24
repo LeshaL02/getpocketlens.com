@@ -466,7 +466,7 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending…';
 
-        fetch('https://pocketlens-backend-production.up.railway.app/uninstall/submit', {
+        fetch('https://api.getpocketlens.com/uninstall/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
