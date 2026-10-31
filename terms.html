@@ -110,13 +110,6 @@
 
     .doc__meta strong { color: var(--text); font-weight: 700; }
 
-    /* Placeholder value still to be filled in before publishing */
-    .fill-in {
-      background: #fff2b3;
-      color: var(--text);
-      padding: 0 4px;
-      border-radius: 3px;
-    }
 
     .short {
       background: var(--white);
@@ -158,6 +151,21 @@
     .doc h2 .num {
       color: var(--teal);
       margin-right: 4px;
+    }
+
+    .doc h3 {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin: 34px 0 10px;
+      scroll-margin-top: 80px;
+    }
+
+    .doc h2 + h3 { margin-top: 0; }
+
+    .doc h3 .num {
+      color: var(--teal);
+      margin-right: 2px;
     }
 
     .doc p {
@@ -261,10 +269,9 @@
 
       <h1 class="doc__title">Terms of Service</h1>
 
-      <!-- Before publishing: replace both highlighted dates with the day you publish. -->
       <p class="doc__meta">
-        <span><strong>Effective date:</strong> <span class="fill-in">[publish date]</span></span>
-        <span><strong>Last updated:</strong> <span class="fill-in">[publish date]</span></span>
+        <span><strong>Effective date:</strong> October 31, 2026</span>
+        <span><strong>Last updated:</strong> October 31, 2026</span>
         <span><strong>Version:</strong> 1.0</span>
       </p>
 
@@ -288,10 +295,10 @@
         <h2><span class="num">3.</span> What Pocketlens Does, and What It Doesn't</h2>
         <ul>
           <li><strong>A tool, not advice.</strong> Pocketlens helps you notice and manage your own spending. It is not financial, legal, tax, or accounting advice, and it is not a bank, budgeting service, or credit service. You are responsible for your own financial decisions.</li>
-          <li><strong>Detection is best-effort.</strong> Pocketlens detects purchases by reading order confirmation and checkout pages on your device. It can miss purchases, record an amount incorrectly, or record a purchase twice, especially on sites we have not tested. Retailers labeled "Beta" are newer and less tested. Your running total and any streaks or calendar views may not match your real spending. You can correct or add entries yourself where the extension allows it.</li>
-          <li><strong>Limits and pauses are self-set.</strong> Your monthly limit, cooldown, and blocklist are settings you choose. Pocketlens does not prevent you from buying anything, and it cannot stop a purchase made on another device, in another browser, or in person.</li>
+          <li><strong>Detection is best-effort.</strong> Pocketlens detects purchases by reading order confirmation and checkout pages on your device. It can miss purchases, record an amount incorrectly, or record a purchase twice. On stores without their own entry in Pocketlens, it relies on a general detector, which is less precise. Your running total and any streaks, history, or dashboard views may not match your real spending. You can correct or add entries yourself where the extension allows it.</li>
+          <li><strong>Limits and pauses are self-set.</strong> Your monthly limit, cooldown, blocklist, and checkout blocking are settings you choose and can override or turn off. Pocketlens does not prevent you from buying anything, and it cannot stop a purchase made on another device, in another browser, or in person.</li>
           <li><strong>Currency.</strong> Amounts are recorded in the currency shown on the page. We do not convert currencies.</li>
-          <li><strong>Availability.</strong> We may change, suspend, or remove features, retailers, or the free or paid tiers at any time. We will try to give notice of changes that significantly reduce what a paying subscriber receives. Our server or our providers may occasionally be unavailable; see "Subscription checks" in <a href="#subscription-checks">Section 5</a> for how Plus behaves when that happens.</li>
+          <li><strong>Availability.</strong> We may change, suspend, or remove features, stores, or the free or paid tiers at any time. We will try to give notice of changes that significantly reduce what a paying subscriber receives. Our server or our providers may occasionally be unavailable; see "Subscription checks" in <a href="#subscription-checks">Section 5</a> for how Plus behaves when that happens.</li>
         </ul>
       </section>
 
@@ -303,8 +310,8 @@
       <section id="s5">
         <h2><span class="num">5.</span> Pocketlens Plus</h2>
         <ul>
-          <li><strong>What you get.</strong> Free covers Amazon, Walmart, and Target. Plus adds detection on other stores, including the retailers we have specifically tested and a general detector for stores we have not, as described on our website and in the extension at the time you subscribe. Features may change over time.</li>
-          <li><strong>Price and billing.</strong> Plus costs US$3.99 per month, plus any applicable taxes. Payments are processed by Stripe. We never see or store your card details. At checkout you'll be asked to confirm that you agree to these terms.</li>
+          <li><strong>What you get.</strong> The free version tracks purchases on Amazon, Walmart, and Target. Plus adds purchase detection on other stores, full purchase history, the Pocketlens dashboard, and CSV export, as described on our website and in the extension at the time you subscribe. Features may change over time.</li>
+          <li><strong>Price and billing.</strong> Plus costs US$3.99 per month, plus any applicable taxes. Payments are processed by Stripe. We never see or store your card details.</li>
           <li><strong>Automatic renewal.</strong> Your subscription renews automatically at the end of each billing period at the then-current price until you cancel. You authorize us, through Stripe, to charge your payment method each period.</li>
           <li><strong>Price changes.</strong> If we change the price, we will give you advance notice, and the new price applies from your next renewal after that notice. You can cancel before it takes effect.</li>
           <li><strong>Promotions.</strong> Discount codes and promotional offers are subject to the terms stated when they are offered and may end at any time.</li>
@@ -366,7 +373,7 @@
 
       <section id="s13">
         <h2><span class="num">13.</span> Governing Law and Disputes</h2>
-        <p>These terms are governed by the laws of the State of Minnesota, United States, without regard to its conflict-of-law rules.</p>
+        <p>These terms are governed by the laws of the State of Minnesota, United States, without regard to its conflict-of-law rules. Any dispute that we can't resolve informally will be heard in the state or federal courts located in Hennepin County, Minnesota, and you and we agree to those courts' jurisdiction. Either of us may instead bring a claim in a small claims court case if it qualifies. If you live in a country whose law gives you the right to bring claims in your local courts, nothing in these terms takes that right away.</p>
         <p>Before filing a claim, please email <a href="mailto:hello@getpocketlens.com">hello@getpocketlens.com</a> and give us a chance to resolve it.</p>
       </section>
 
