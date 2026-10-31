@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Pocketlens</title>
+  <meta name="description" content="The terms for using the Pocketlens Chrome extension, the Pocketlens Plus subscription, and getpocketlens.com." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --dark:       #0f0f1a;
+      --dark-card:  #1a1a2e;
+      --off-white:  #f5f5f0;
+      --white:      #ffffff;
+      --teal:       #00A688;
+      --teal-dark:  #008f75;
+      --border:     #e0e0d8;
+      --border-dark:#2e2e4e;
+      --text:       #1a1a2e;
+      --muted:      #555555;
+      --header-text:#e8e4dc;
+      --font:       'Nunito', Georgia, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--off-white);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--teal); }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--dark);
+      border-bottom: 2px solid var(--teal);
+      padding: 14px 40px;
+    }
+
+    .nav__home {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav__home:hover { text-decoration: none; }
+
+    .nav__logo {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .nav__tagline {
+      font-weight: 700;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--header-text);
+    }
+
+    .nav__tagline span { color: var(--teal); }
+
+    /* ── DOCUMENT ────────────────────────────────────────── */
+    main {
+      flex: 1;
+      padding: 136px 40px 96px;
+    }
+
+    .doc {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .doc__title {
+      font-size: clamp(36px, 6vw, 52px);
+      font-weight: 800;
+      font-style: italic;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 18px;
+    }
+
+    .doc__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 22px;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .doc__meta strong { color: var(--text); font-weight: 700; }
+
+    /* Placeholder value still to be filled in before publishing */
+    .fill-in {
+      background: #fff2b3;
+      color: var(--text);
+      padding: 0 4px;
+      border-radius: 3px;
+    }
+
+    .short {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 14px;
+      padding: 26px 30px;
+      margin-bottom: 16px;
+    }
+
+    .short__label {
+      font-weight: 800;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .short p:last-child {
+      font-size: 16.5px;
+      line-height: 1.75;
+    }
+
+    .doc section {
+      padding-top: 44px;
+      margin-top: 44px;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 72px;
+    }
+
+    .doc h2 {
+      font-size: 22px;
+      font-weight: 800;
+      font-style: italic;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .doc h2 .num {
+      color: var(--teal);
+      margin-right: 4px;
+    }
+
+    .doc p {
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .doc p + p,
+    .doc p + ul,
+    .doc ul + p { margin-top: 16px; }
+
+    .doc ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .doc li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 16px;
+      line-height: 1.75;
+      scroll-margin-top: 80px;
+    }
+
+    .doc li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 0.72em;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .doc li strong,
+    .doc p strong { font-weight: 800; }
+
+    .doc__close {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-weight: 700;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      border-top: 2px solid var(--teal);
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .footer__logo {
+      width: 26px; height: 26px;
+      border-radius: 5px;
+      margin-bottom: 4px;
+    }
+
+    .footer__company {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--header-text);
+    }
+
+    .footer__version {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .footer__version em { color: var(--teal); font-weight: 700; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px; }
+      main { padding: 112px 22px 72px; }
+      .short { padding: 22px 22px; }
+      .doc section { padding-top: 36px; margin-top: 36px; }
+      .doc h2 { font-size: 20px; }
+      footer { padding: 28px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav__home" aria-label="Pocketlens home">
+      <img src="assets/icon48.png" alt="Pocketlens" class="nav__logo" />
+      <span class="nav__tagline">Spend with <span>purpose.</span></span>
+    </a>
+  </nav>
+
+  <main>
+    <article class="doc">
+
+      <h1 class="doc__title">Terms of Service</h1>
+
+      <!-- Before publishing: replace both highlighted dates with the day you publish. -->
+      <p class="doc__meta">
+        <span><strong>Effective date:</strong> <span class="fill-in">[publish date]</span></span>
+        <span><strong>Last updated:</strong> <span class="fill-in">[publish date]</span></span>
+        <span><strong>Version:</strong> 1.0</span>
+      </p>
+
+      <div class="short">
+        <p class="short__label">The short version</p>
+        <p>Pocketlens is a Chrome extension that helps you track online purchases against a monthly limit and pause before you check out. It is a tool to support your own decisions, not financial advice, and it can miss purchases. The free version costs nothing. Pocketlens Plus is a paid subscription, US$3.99 a month, that renews automatically until you cancel. You can cancel any time. By installing or using Pocketlens, or by buying Plus, you agree to these terms and to our <a href="/privacy">Privacy Policy</a>.</p>
+      </div>
+
+      <section id="s1">
+        <h2><span class="num">1.</span> Who We Are and What These Terms Cover</h2>
+        <p>Pocketlens is operated by Pocketlens LLC, a limited liability company based in Minnesota, United States ("Pocketlens," "we," "us"). These terms cover the Pocketlens Chrome extension, the Pocketlens Plus subscription, and our website at <a href="/">getpocketlens.com</a> (together, the "Service"). If you do not agree to these terms, do not install or use the Service.</p>
+        <p>Questions: <a href="mailto:hello@getpocketlens.com">hello@getpocketlens.com</a></p>
+      </section>
+
+      <section id="s2">
+        <h2><span class="num">2.</span> Who Can Use Pocketlens</h2>
+        <p>You must be at least 13 years old to use the free version. You must be at least 18 years old (or the age of majority where you live, if higher) to buy Pocketlens Plus. If you are under the age of majority where you live, you may use the free version only with a parent or guardian's permission.</p>
+      </section>
+
+      <section id="s3">
+        <h2><span class="num">3.</span> What Pocketlens Does, and What It Doesn't</h2>
+        <ul>
+          <li><strong>A tool, not advice.</strong> Pocketlens helps you notice and manage your own spending. It is not financial, legal, tax, or accounting advice, and it is not a bank, budgeting service, or credit service. You are responsible for your own financial decisions.</li>
+          <li><strong>Detection is best-effort.</strong> Pocketlens detects purchases by reading order confirmation and checkout pages on your device. It can miss purchases, record an amount incorrectly, or record a purchase twice, especially on sites we have not tested. Retailers labeled "Beta" are newer and less tested. Your running total and any streaks or calendar views may not match your real spending. You can correct or add entries yourself where the extension allows it.</li>
+          <li><strong>Limits and pauses are self-set.</strong> Your monthly limit, cooldown, and blocklist are settings you choose. Pocketlens does not prevent you from buying anything, and it cannot stop a purchase made on another device, in another browser, or in person.</li>
+          <li><strong>Currency.</strong> Amounts are recorded in the currency shown on the page. We do not convert currencies.</li>
+          <li><strong>Availability.</strong> We may change, suspend, or remove features, retailers, or the free or paid tiers at any time. We will try to give notice of changes that significantly reduce what a paying subscriber receives. Our server or our providers may occasionally be unavailable; see "Subscription checks" in <a href="#subscription-checks">Section 5</a> for how Plus behaves when that happens.</li>
+        </ul>
+      </section>
+
+      <section id="s4">
+        <h2><span class="num">4.</span> Your Data and Your Device</h2>
+        <p>Your spending data is stored on your device, as described in our Privacy Policy (<a href="/privacy">getpocketlens.com/privacy</a>). If you uninstall the extension, clear Chrome's storage, or lose your device, we cannot recover that data for you. Your install ID is erased on uninstall, so a reinstall starts as a new free install until you restore a Plus subscription (<a href="#s6">Section 6</a>).</p>
+      </section>
+
+      <section id="s5">
+        <h2><span class="num">5.</span> Pocketlens Plus</h2>
+        <ul>
+          <li><strong>What you get.</strong> Free covers Amazon, Walmart, and Target. Plus adds detection on other stores, including the retailers we have specifically tested and a general detector for stores we have not, as described on our website and in the extension at the time you subscribe. Features may change over time.</li>
+          <li><strong>Price and billing.</strong> Plus costs US$3.99 per month, plus any applicable taxes. Payments are processed by Stripe. We never see or store your card details. At checkout you'll be asked to confirm that you agree to these terms.</li>
+          <li><strong>Automatic renewal.</strong> Your subscription renews automatically at the end of each billing period at the then-current price until you cancel. You authorize us, through Stripe, to charge your payment method each period.</li>
+          <li><strong>Price changes.</strong> If we change the price, we will give you advance notice, and the new price applies from your next renewal after that notice. You can cancel before it takes effect.</li>
+          <li><strong>Promotions.</strong> Discount codes and promotional offers are subject to the terms stated when they are offered and may end at any time.</li>
+          <li><strong>Failed payments.</strong> If a renewal payment fails, Stripe will retry it over the following days, and Plus stays on while it does. If every retry fails, your subscription is cancelled and your install returns to the free tier. You can subscribe again at any time.</li>
+          <li id="subscription-checks"><strong>Subscription checks.</strong> Plus works by having the extension check your subscription with our server from time to time. If our server can't be reached, Plus keeps working for up to 7 days after the last successful check. After that, the extension shows the free tier until a check succeeds again, and Plus returns on its own.</li>
+        </ul>
+      </section>
+
+      <section id="s6">
+        <h2><span class="num">6.</span> Cancellation, Refunds, and Restoring Your Subscription</h2>
+        <ul>
+          <li><strong>Cancel any time.</strong> You can cancel from the Stripe-hosted billing page reached from within the extension, or by emailing <a href="mailto:hello@getpocketlens.com">hello@getpocketlens.com</a>. Cancelling stops future renewals. Plus access continues until the end of the period you have paid for.</li>
+          <li><strong>Refunds.</strong> Payments are generally non-refundable. If you were charged in error or forgot to cancel, email <a href="mailto:hello@getpocketlens.com">hello@getpocketlens.com</a> within 7 days of the charge and we will review it. This does not affect any refund rights you have under the law where you live.</li>
+          <li><strong>Restoring Plus.</strong> If you reinstall Pocketlens, you can reconnect your subscription by entering the email address you used at checkout. We check that email with Stripe at that moment and link any active subscription to your new install, in our records and in Stripe's. Because that email is the only thing used to confirm the subscription, keep it private. If you believe someone else has restored your subscription, contact us and we will help you reconnect it.</li>
+          <li><strong>Statutory rights.</strong> Nothing in these terms limits any consumer rights you have under the law where you live that cannot be waived.</li>
+        </ul>
+      </section>
+
+      <section id="s7">
+        <h2><span class="num">7.</span> Using Pocketlens Fairly</h2>
+        <p>You agree not to:</p>
+        <ul>
+          <li>reverse engineer, decompile, or copy the extension in order to resell, redistribute, or compete with it (this does not limit rights you have under open-source licenses or applicable law);</li>
+          <li>bypass, interfere with, or overload our servers, rate limits, or subscription checks, including by repeated or automated Restore Purchase attempts, or by modifying the extension to unlock Plus;</li>
+          <li>use Pocketlens to claim a subscription you have not paid for, or to restore a subscription that belongs to someone else;</li>
+          <li>use the Service to break the law or violate anyone else's rights.</li>
+        </ul>
+        <p>We may suspend or end access if you do, and we may limit requests that look automated or abusive.</p>
+      </section>
+
+      <section id="s8">
+        <h2><span class="num">8.</span> Retailers and Third-Party Sites</h2>
+        <p>Pocketlens runs on third-party shopping websites, such as Amazon, Walmart, and Target. We are not affiliated with, sponsored by, or endorsed by any retailer. Retailer names and logos belong to their owners and are used only to identify the sites Pocketlens works with. Your use of those sites, including your purchases, is governed by their own terms, and we are not responsible for them. A retailer may change its site at any time in a way that breaks detection. We do our best to fix it, but we cannot guarantee it.</p>
+      </section>
+
+      <section id="s9">
+        <h2><span class="num">9.</span> Our Property</h2>
+        <p>Pocketlens, including its software, name, logo, and design, belongs to Pocketlens LLC. We give you a personal, non-exclusive, non-transferable, revocable license to install and use the extension on your own devices for your own personal use, subject to these terms. We do not sell you the software. If you send us feedback or suggestions, you allow us to use them to improve the Service without owing you anything.</p>
+      </section>
+
+      <section id="s10">
+        <h2><span class="num">10.</span> The Service Is Provided "As Is"</h2>
+        <p>To the fullest extent the law allows, the Service is provided "as is" and "as available," without warranties of any kind, whether express or implied, including any warranty of merchantability, fitness for a particular purpose, accuracy, or non-infringement. We do not promise that Pocketlens will be uninterrupted, error-free, or free of missed or incorrect purchase detection, or that it will help you reach any financial goal.</p>
+      </section>
+
+      <section id="s11">
+        <h2><span class="num">11.</span> Limitation of Liability</h2>
+        <p>To the fullest extent the law allows:</p>
+        <ul>
+          <li>We are not liable for indirect, incidental, special, consequential, or punitive damages, or for lost profits, savings, data, or opportunities, arising from your use of the Service. This includes money you spend, fees you incur, or limits you exceed because a purchase was missed or recorded incorrectly.</li>
+          <li>Our total liability to you for any claim related to the Service is limited to the greater of (a) the amount you paid us for Plus in the 12 months before the claim arose, or (b) US$50.</li>
+        </ul>
+      </section>
+
+      <section id="s12">
+        <h2><span class="num">12.</span> Ending Your Use</h2>
+        <p>You can stop using Pocketlens at any time by uninstalling the extension and, if you subscribe to Plus, cancelling as described in <a href="#s6">Section 6</a>. We may suspend or end your access if you break these terms or if we discontinue the Service. If we end a paid subscription without cause, we will refund the unused part of your current paid period. Sections that by their nature should continue after the Service ends, such as Sections 9 through 11 and 13, continue to apply.</p>
+      </section>
+
+      <section id="s13">
+        <h2><span class="num">13.</span> Governing Law and Disputes</h2>
+        <p>These terms are governed by the laws of the State of Minnesota, United States, without regard to its conflict-of-law rules.</p>
+        <p>Before filing a claim, please email <a href="mailto:hello@getpocketlens.com">hello@getpocketlens.com</a> and give us a chance to resolve it.</p>
+      </section>
+
+      <section id="s14">
+        <h2><span class="num">14.</span> Changes to These Terms</h2>
+        <p>We may update these terms as Pocketlens changes. We will update the date above and tell you about material changes through the Chrome Web Store listing and, for Plus subscribers, by email where we can. If you keep using the Service after the changes take effect, you accept them. If you do not agree, stop using the Service and cancel any subscription. The current version is always at <a href="/terms">getpocketlens.com/terms</a>.</p>
+      </section>
+
+      <section id="s15">
+        <h2><span class="num">15.</span> General</h2>
+        <p>If any part of these terms is found unenforceable, the rest still applies. If we do not enforce a right, that does not waive it. You may not transfer these terms to someone else without our consent. We may transfer them as part of a merger, acquisition, or sale of the business. These terms and the Privacy Policy are the whole agreement between you and us about the Service.</p>
+      </section>
+
+      <p class="doc__close">Questions? Email <a href="mailto:hello@getpocketlens.com">hello@getpocketlens.com</a>.</p>
+
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="assets/icon48.png" alt="Pocketlens" class="footer__logo" />
+    <p class="footer__company">Pocketlens LLC · Minnesota, United States</p>
+    <p class="footer__version">Pocketlens LLC · Terms of Service v1.0 · <em>Spend with purpose</em></p>
+  </footer>
+
+</body>
+</html>

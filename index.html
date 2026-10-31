@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pocketlens - Spend with purpose</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon16.png" />
-  <link rel="shortcut icon" href="assets/icon48.png" />
+  <title>Pocketlens — Spend with purpose</title>
   <meta name="description" content="Pocketlens automatically tracks every online purchase and intervenes before impulse becomes regret. No bank connection. No account. Free." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,7 +12,7 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     :root {
       --dark:       #0f0f1a;
@@ -24,6 +21,7 @@
       --white:      #ffffff;
       --teal:       #00A688;
       --teal-dark:  #008f75;
+      --teal-soft:  rgba(0,166,136,0.12);
       --border:     #e0e0d8;
       --border-dark:#2e2e4e;
       --text:       #1a1a2e;
@@ -41,11 +39,13 @@
       line-height: 1.6;
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     img { display: block; max-width: 100%; }
     a { color: var(--teal); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    section { scroll-margin-top: 70px; }
 
     /* ── NAV ─────────────────────────────────────────────── */
     nav {
@@ -269,10 +269,10 @@
       line-height: 1.7;
     }
 
-    /* ── FEATURES — now OFF-WHITE ────────────────────────── */
+    /* ── FEATURES — five-card carousel ───────────────────── */
     .features {
       background: var(--off-white);
-      padding: 100px 40px;
+      padding: 90px 40px 80px;
     }
 
     .features__label {
@@ -290,80 +290,615 @@
       font-weight: 800;
       font-style: italic;
       color: var(--text);
-      margin-bottom: 64px;
+      margin-bottom: 16px;
       line-height: 1.3;
     }
 
-    .features__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
-      max-width: 1100px;
+    .features__sub {
+      text-align: center;
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 1240px;
       margin: 0 auto;
     }
 
+    .carousel__viewport {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 4px 20px;
+      /* hide native scrollbar, side arrows drive scrolling */
+      scrollbar-width: none;
+    }
+
+    .carousel__viewport::-webkit-scrollbar { display: none; }
+
+    .carousel__track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(440px, 520px);
+      gap: 32px;
+    }
+
     .feature-card {
+      scroll-snap-align: start;
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 18px;
       overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
     .feature-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+      transform: translateY(-4px) scale(1.025);
+      box-shadow: 0 20px 44px rgba(15,15,26,0.14);
+      border-color: var(--teal);
+      z-index: 2;
     }
 
-    .feature-card__screenshot {
+    .feature-card__icon {
       width: 100%;
-      aspect-ratio: 16/10;
+      aspect-ratio: 4/3;
       background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-bottom: 1px solid var(--border);
       overflow: hidden;
     }
 
-    .feature-card__screenshot img {
+    .feature-card__icon span {
+      font-size: 34px;
+    }
+
+    .feature-card__icon img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .feature-card__body { padding: 24px; }
+    .feature-card__body { padding: 32px; }
 
     .feature-card__tag {
       font-family: var(--font);
       font-weight: 700;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--teal);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .feature-card__title {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 800;
       font-style: italic;
       color: var(--text);
-      margin-bottom: 10px;
-      line-height: 1.3;
+      margin-bottom: 12px;
+      line-height: 1.25;
     }
 
     .feature-card__desc {
-      font-size: 14px;
+      font-size: 15.5px;
       color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .carousel__btn {
+      position: absolute;
+      top: 44%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 28px rgba(15,15,26,0.1);
+      z-index: 5;
+    }
+
+    .carousel__btn--prev { left: -68px; }
+    .carousel__btn--next { right: -68px; }
+
+    @media (min-width: 1360px) {
+      .features { padding-left: 96px; padding-right: 96px; }
+    }
+
+    .carousel__btn:hover {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--white);
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    .carousel__btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+      background: var(--white);
+      border-color: var(--border);
+      color: var(--text);
+      transform: translateY(-50%);
+    }
+
+    /* ── RETAILER MARQUEE — #0f0f1a ──────────────────────── */
+    .marquee-section {
+      background: var(--dark);
+      padding: 72px 0;
+      text-align: center;
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      overflow: hidden;
+    }
+
+    .marquee-section__label {
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .marquee-section__headline {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800;
+      font-style: italic;
+      color: var(--header-text);
+      margin-bottom: 44px;
+      padding: 0 40px;
+    }
+
+    .marquee {
+      position: relative;
+      width: 100%;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .marquee__track {
+      display: flex;
+      width: max-content;
+      gap: 16px;
+      animation: marquee-scroll 28s linear infinite;
+    }
+
+    .marquee:hover .marquee__track {
+      animation-play-state: paused;
+    }
+
+    .marquee__pill {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--dark-card);
+      border: 1px solid var(--border-dark);
+      color: var(--header-text);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 26px;
+      border-radius: 40px;
+      white-space: nowrap;
+    }
+
+    .marquee__pill--soon {
+      color: var(--faint-dark);
+      border-style: dashed;
+    }
+
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee__track { animation: none; }
+    }
+
+    /* ── PLUS — three alternating sections ───────────────── */
+    .plus-hero {
+      background: var(--off-white);
+      padding: 110px 40px 90px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .plus__inner { max-width: 1100px; margin: 0 auto; }
+
+    .plus__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .plus__copy { max-width: 540px; }
+
+    .plus__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 18px;
+    }
+
+    .plus__eyebrow::before {
+      content: "";
+      width: 20px;
+      height: 2px;
+      background: var(--teal);
+      display: inline-block;
+    }
+
+    .plus__headline {
+      font-size: clamp(32px, 5vw, 50px);
+      font-weight: 800;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.12;
+      margin-bottom: 20px;
+    }
+
+    .plus__headline em { color: var(--teal); font-style: italic; }
+
+    .plus__sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 460px;
+    }
+
+    .plus__cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .plus__price {
+      font-family: var(--font);
+    }
+
+    .plus__price-amount {
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--text);
+      display: block;
+    }
+
+    .plus__price-note {
+      font-size: 12.5px;
+      color: var(--faint);
+    }
+
+    /* ring graphic */
+    .ring-wrap { text-align: center; flex-shrink: 0; }
+
+    .ring { width: 220px; height: 220px; display: block; }
+
+    .spoke {
+      stroke: var(--teal);
+      stroke-width: 5;
+      stroke-linecap: round;
+    }
+
+    .spoke--free { stroke: var(--faint-dark); opacity: 0.9; }
+
+    .ring-count {
+      font-family: var(--font);
+      font-weight: 800;
+      font-size: 56px;
+      fill: var(--teal);
+    }
+
+    .ring-label {
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 12px;
+      fill: var(--faint-dark);
+    }
+
+    .ring-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 14px;
+      font-family: var(--font);
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .ring-legend__item { display: flex; align-items: center; gap: 6px; }
+
+    .ring-legend__dot { width: 8px; height: 8px; border-radius: 50%; }
+    .ring-legend__dot--free { background: var(--faint-dark); }
+    .ring-legend__dot--plus { background: var(--teal); }
+
+    /* ── PLUS — coverage section (dark) ──────────────────── */
+    .plus-coverage-section {
+      background: var(--dark);
+      padding: 90px 40px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .coverage-head {
+      text-align: center;
+      max-width: 540px;
+      margin: 0 auto 44px;
+    }
+
+    .coverage-head__title {
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 800;
+      font-style: italic;
+      color: var(--header-text);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .coverage-head__sub {
+      font-size: 14.5px;
+      color: var(--faint-dark);
       line-height: 1.7;
     }
 
-    /* ── EMAIL CAPTURE — #0f0f1a ─────────────────────────── */
+    .coverage {
+      max-width: 880px;
+      margin: 0 auto;
+      background: linear-gradient(175deg, var(--dark-card), #14142a);
+      border: 1px solid var(--border-dark);
+      border-radius: 22px;
+      padding: 40px 36px 36px;
+    }
+
+    .coverage__bar-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--faint-dark);
+      margin-bottom: 10px;
+    }
+
+    .coverage__bar-row span:last-child { color: var(--teal); }
+
+    .coverage__bar {
+      height: 10px;
+      border-radius: 6px;
+      background: var(--dark);
+      border: 1px solid var(--border-dark);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .coverage__bar-fill {
+      height: 100%;
+      width: 12%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--teal), #3fd9b8);
+      transition: width 0.9s cubic-bezier(.4,0,.2,1);
+    }
+
+    .coverage:hover .coverage__bar-fill,
+    .coverage:focus-within .coverage__bar-fill { width: 100%; }
+
+    .coverage__grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .store-chip {
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 9px 18px;
+      border-radius: 40px;
+      border: 1px solid var(--border-dark);
+      color: var(--faint-dark);
+      background: transparent;
+      transition: background 0.35s ease, color 0.35s ease,
+                  border-color 0.35s ease, transform 0.35s ease;
+    }
+
+    .store-chip--free {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--white);
+    }
+
+    .store-chip--beta {
+      opacity: 0.68;
+    }
+
+    .store-chip--more {
+      border-style: dashed;
+      font-style: italic;
+    }
+
+    .coverage:hover .store-chip,
+    .coverage:focus-within .store-chip {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--white);
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .coverage:hover .store-chip--more,
+    .coverage:focus-within .store-chip--more {
+      background: transparent;
+      border-style: dashed;
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .coverage__hint {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 12.5px;
+      color: var(--faint-dark);
+    }
+
+    /* roadmap */
+    .plus-roadmap-section {
+      background: var(--off-white);
+      padding: 90px 40px 100px;
+    }
+
+    .plus__roadmap {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .roadmap__intro { max-width: 260px; }
+
+    .roadmap__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    .roadmap__eyebrow::before {
+      content: "";
+      width: 20px;
+      height: 2px;
+      background: var(--teal);
+      display: inline-block;
+    }
+
+    .roadmap__title {
+      font-size: 26px;
+      font-weight: 800;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    .roadmap__grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px 32px;
+      min-width: 260px;
+    }
+
+    .roadmap__item { display: flex; gap: 12px; }
+
+    .roadmap__bullet {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      border: 2px solid var(--teal);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .roadmap__item-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .roadmap__item-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* plus closing CTA bar */
+    .plus-cta {
+      background: var(--teal);
+      border-radius: 18px;
+      padding: 40px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .plus-cta__headline {
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 800;
+      font-style: italic;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .plus-cta__sub {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .btn-offwhite {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--off-white);
+      color: var(--dark);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 26px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn-offwhite:hover {
+      background: var(--border);
+      transform: translateY(-1px);
+      text-decoration: none;
+      color: var(--dark);
+    }
+
+    /* ── EMAIL CAPTURE — off-white ───────────────────────── */
     .capture {
       background: var(--dark);
       padding: 100px 40px;
       text-align: center;
       border-top: 1px solid var(--border-dark);
-      border-bottom: 1px solid var(--border-dark);
     }
 
     .capture__eyebrow {
@@ -390,7 +925,7 @@
       font-size: 15px;
       color: var(--faint-dark);
       margin-bottom: 40px;
-      max-width: 420px;
+      max-width: 440px;
       margin-left: auto;
       margin-right: auto;
       line-height: 1.7;
@@ -444,106 +979,8 @@
       font-size: 13px;
       color: var(--faint-dark);
       font-weight: 600;
-      margin-top: 28px;
     }
 
-    /* ── FOOTER ──────────────────────────────────────────── */
-    footer {
-      background: var(--dark);
-      border-top: 2px solid var(--teal);
-      padding: 24px 40px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .footer__brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer__logo {
-      width: 22px; height: 22px;
-      border-radius: 4px;
-      flex-shrink: 0;
-    }
-
-    .footer__tagline {
-      font-family: var(--font);
-      font-weight: 700;
-      font-style: italic;
-      font-size: 13px;
-      color: var(--header-text);
-    }
-
-    .footer__center {
-      text-align: center;
-    }
-
-    .footer__link {
-      font-family: var(--font);
-      font-weight: 600;
-      font-size: 12px;
-      color: var(--faint-dark);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer__link:hover {
-      color: var(--teal);
-      text-decoration: none;
-    }
-
-    .footer__right {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 20px;
-    }
-
-    .footer__copy {
-      font-family: var(--font);
-      font-size: 11px;
-      color: var(--border-dark);
-    }
-
-    /* ── RESPONSIVE ──────────────────────────────────────── */
-    @media (max-width: 768px) {
-      nav { padding: 12px 20px; }
-      .nav__tagline { display: none; }
-      .hero { padding: 120px 24px 80px; }
-      .problem { padding: 70px 24px; }
-      .features { padding: 70px 24px; }
-      .capture { padding: 70px 24px; }
-      .problem__numbers { gap: 16px; }
-      footer {
-        padding: 20px 24px;
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .footer__center { text-align: left; }
-      .footer__right { justify-content: flex-start; }
-    }
-
-    /* ── ANIMATIONS ──────────────────────────────────────── */
-    @media (prefers-reduced-motion: no-preference) {
-      .hero__eyebrow,
-      .hero__headline,
-      .hero__sub,
-      .hero__actions {
-        animation: fadeUp 0.6s ease both;
-      }
-      .hero__headline { animation-delay: 0.1s; }
-      .hero__sub      { animation-delay: 0.2s; }
-      .hero__actions  { animation-delay: 0.3s; }
-
-      @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(16px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-    }
     /* ── KIT FORM OVERRIDE ───────────────────────────────────── */
     .formkit-form {
       background: transparent !important;
@@ -623,6 +1060,140 @@
       font-size: 13px !important;
       margin-bottom: 10px !important;
     }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      border-top: 2px solid var(--teal);
+      padding: 24px 40px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer__logo {
+      width: 22px; height: 22px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .footer__tagline {
+      font-family: var(--font);
+      font-weight: 700;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--header-text);
+    }
+
+    .footer__center {
+      text-align: center;
+    }
+
+    .footer__link {
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--faint-dark);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer__link:hover {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .footer__sep {
+      color: var(--faint-dark);
+      font-size: 12px;
+      margin: 0 8px;
+    }
+
+    .footer__right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+
+    .footer__copy {
+      font-family: var(--font);
+      font-size: 11px;
+      color: var(--border-dark);
+    }
+
+    /* ── PLUS BUTTONS: installed vs not ─────────────────── */
+    /* The Pocketlens extension adds data-pocketlens-installed to <html>
+       on this site, so these labels switch on their own. */
+    .pl-if-installed { display: none; }
+    html[data-pocketlens-installed] .pl-if-installed { display: inline; }
+    html[data-pocketlens-installed] .pl-if-not-installed { display: none; }
+
+    .plus__install-note {
+      flex-basis: 100%;
+      font-size: 12.5px;
+      color: var(--faint);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .plus__top { flex-direction: column; align-items: flex-start; }
+      .ring-wrap { align-self: center; }
+      .coverage { padding: 32px 24px 28px; }
+      .plus-cta { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px; }
+      .nav__tagline { display: none; }
+      .hero { padding: 120px 24px 80px; }
+      .problem { padding: 70px 24px; }
+      .features { padding: 70px 24px 60px; }
+      .carousel__btn { width: 38px; height: 38px; font-size: 15px; }
+      .carousel__btn--prev { left: 2px; }
+      .carousel__btn--next { right: 2px; }
+      .carousel__viewport { padding: 8px 0 20px; }
+      .carousel__track { grid-auto-columns: calc(100vw - 48px); gap: 16px; }
+      .plus-hero { padding: 80px 24px 60px; }
+      .plus-coverage-section { padding: 60px 24px; }
+      .plus-roadmap-section { padding: 60px 24px 70px; }
+      .capture { padding: 70px 24px; }
+      .problem__numbers { gap: 16px; }
+      .marquee-section { padding: 56px 0; }
+      .roadmap__grid { grid-template-columns: 1fr; }
+      footer {
+        padding: 20px 24px;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .footer__center { text-align: left; }
+      .footer__right { justify-content: flex-start; }
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero__eyebrow,
+      .hero__headline,
+      .hero__sub,
+      .hero__actions {
+        animation: fadeUp 0.6s ease both;
+      }
+      .hero__headline { animation-delay: 0.1s; }
+      .hero__sub      { animation-delay: 0.2s; }
+      .hero__actions  { animation-delay: 0.3s; }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    }
   </style>
 </head>
 <body>
@@ -639,13 +1210,13 @@
       target="_blank"
       rel="noopener"
     >
-      Add to Chrome - Free
+      Add to Chrome — Free
     </a>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (unchanged) -->
   <section class="hero">
-    <p class="hero__eyebrow">Chrome Extension - Free</p>
+    <p class="hero__eyebrow">Chrome Extension — Free</p>
     <h1 class="hero__headline">
       Stop spending money<br />you'll <em>regret.</em>
     </h1>
@@ -657,13 +1228,12 @@
     <div class="hero__actions">
       <a
         href="https://chromewebstore.google.com/detail/pocketlens/boidjclblajoehokcfknaajadjjhoaab"
-          class="btn-primary"
-          target="_blank"
-          rel="noopener"
-        >
-          <img src="assets/icon48.png" alt="" style="width: 18px; height: 18px; border-radius: 4px;" />
-          Add to Chrome - It's Free
-        </a>
+        class="btn-primary"
+        target="_blank"
+        rel="noopener"
+      >
+        🔍 Add to Chrome — It's Free
+      </a>
       <a href="#how-it-works" class="btn-secondary">
         See how it works ↓
       </a>
@@ -673,14 +1243,14 @@
     </p>
   </section>
 
-  <!-- PROBLEM — dark -->
+  <!-- PROBLEM — $200 → $480 (unchanged) -->
   <section class="problem">
     <div class="problem__numbers">
       <div class="problem__number">
         <div class="problem__figure problem__figure--muted">$200</div>
         <div class="problem__label">What you think you spend</div>
       </div>
-      <div class="problem__vs"></div>
+      <div class="problem__vs">→</div>
       <div class="problem__number">
         <div class="problem__figure problem__figure--real">$480</div>
         <div class="problem__label">What you actually spend</div>
@@ -696,79 +1266,338 @@
     </p>
   </section>
 
-<!-- FEATURES — off-white -->
-<section class="features" id="how-it-works">
-  <p class="features__label">How it works</p>
-  <h2 class="features__headline">
-    Three things nobody else does.
-  </h2>
-  <div class="features__grid">
+  <!-- FEATURES — five-card carousel -->
+  <section class="features" id="how-it-works">
+    <p class="features__label">How it works</p>
+    <h2 class="features__headline">
+      Five things nobody else does.
+    </h2>
+    <p class="features__sub">
+      Hover a card for a closer look. Swipe or use the arrows to see them all.
+    </p>
 
-    <div class="feature-card">
-      <div class="feature-card__screenshot">
-        <img src="assets/feature-detection.png" alt="Pocketlens detecting a purchase automatically" loading="lazy" />
+    <div class="carousel">
+      <div class="carousel__viewport" id="carouselViewport">
+        <div class="carousel__track" id="carouselTrack">
+
+          <div class="feature-card">
+            <div class="feature-card__icon"><img src="assets/feature-detection.png" alt="Pocketlens toast confirming a logged purchase and remaining budget" /></div>
+            <div class="feature-card__body">
+              <p class="feature-card__tag">01 — Detection</p>
+              <h3 class="feature-card__title">Every purchase. Automatic.</h3>
+              <p class="feature-card__desc">
+                The moment your order confirms, Pocketlens logs it and
+                updates your remaining budget. No manual entry.
+                No bank connection.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon"><img src="assets/feature-intervention.png" alt="Pocketlens checkout pause asking Sleep on it or Continue anyway" /></div>
+            <div class="feature-card__body">
+              <p class="feature-card__tag">02 — Intervention</p>
+              <h3 class="feature-card__title">30 seconds before you spend.</h3>
+              <p class="feature-card__desc">
+                Sit on a checkout page for 30 seconds and Pocketlens asks
+                one question: still sure? A brief pause eliminates most
+                impulse purchases.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon"><img src="assets/feature-awareness.png" alt="Recent purchases list with mood tags for each one" /></div>
+            <div class="feature-card__body">
+              <p class="feature-card__tag">03 — Awareness</p>
+              <h3 class="feature-card__title">Tag it. Learn your patterns.</h3>
+              <p class="feature-card__desc">
+                Good purchase. Necessary. Regret. Tag how you feel after
+                every buy and watch your patterns take shape over time.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon"><img src="assets/feature-momentum.png" alt="Monthly budget progress with a 3 month spending streak" /></div>
+            <div class="feature-card__body">
+              <p class="feature-card__tag">04 — Momentum</p>
+              <h3 class="feature-card__title">Build a spending streak.</h3>
+              <p class="feature-card__desc">
+                Every month you stay under your limit adds to your streak —
+                a quiet nudge to keep the pattern going.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card__icon"><img src="assets/feature-boundaries.png" alt="Blocked merchants list with sites like Nike and Amazon" /></div>
+            <div class="feature-card__body">
+              <p class="feature-card__tag">05 — Boundaries</p>
+              <h3 class="feature-card__title">Blacklist it. Block or remind.</h3>
+              <p class="feature-card__desc">
+                Add your worst offenders to a blocklist and get a gentle reminder before you shop there.
+              </p>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="feature-card__body">
-        <p class="feature-card__tag">01 — Detection</p>
-        <h3 class="feature-card__title">Catches purchases - and how you felt about them.</h3>
-        <p class="feature-card__desc">
-          The moment your order confirms on a supported
-          retailer, Pocketlens logs it, updates your
-          remaining budget, and asks you to tag how you
-          feel about it - good, necessary, or regret.
-          No manual entry. No bank connection.
-        </p>
+
+      <button class="carousel__btn carousel__btn--prev" id="carouselPrev" aria-label="Previous feature">←</button>
+      <button class="carousel__btn carousel__btn--next" id="carouselNext" aria-label="Next feature">→</button>
+    </div>
+  </section>
+
+  <!-- RETAILER MARQUEE — dark, continuous cycle -->
+  <section class="marquee-section">
+    <p class="marquee-section__label">Works where you shop</p>
+    <h2 class="marquee-section__headline">
+      Pocketlens is already watching these checkouts.
+    </h2>
+
+    <div class="marquee">
+      <div class="marquee__track">
+        <!-- set 1 -->
+        <span class="marquee__pill">Amazon</span>
+        <span class="marquee__pill">Walmart</span>
+        <span class="marquee__pill">Target</span>
+        <span class="marquee__pill">Home Depot</span>
+        <span class="marquee__pill">Lowe's</span>
+        <span class="marquee__pill">Chewy</span>
+        <span class="marquee__pill">eBay</span>
+        <span class="marquee__pill">Etsy</span>
+        <span class="marquee__pill">Best Buy</span>
+        <span class="marquee__pill">Nike</span>
+        <span class="marquee__pill">Kohl's</span>
+        <span class="marquee__pill">Macy's</span>
+        <span class="marquee__pill">Walgreens</span>
+        <span class="marquee__pill">CVS</span>
+        <span class="marquee__pill">Gap</span>
+        <span class="marquee__pill">Samsung</span>
+        <span class="marquee__pill marquee__pill--soon">More coming soon</span>
+        <!-- set 2 (duplicate for seamless loop) -->
+        <span class="marquee__pill" aria-hidden="true">Amazon</span>
+        <span class="marquee__pill" aria-hidden="true">Walmart</span>
+        <span class="marquee__pill" aria-hidden="true">Target</span>
+        <span class="marquee__pill" aria-hidden="true">Home Depot</span>
+        <span class="marquee__pill" aria-hidden="true">Lowe's</span>
+        <span class="marquee__pill" aria-hidden="true">Chewy</span>
+        <span class="marquee__pill" aria-hidden="true">eBay</span>
+        <span class="marquee__pill" aria-hidden="true">Etsy</span>
+        <span class="marquee__pill">Best Buy</span>
+        <span class="marquee__pill">Nike</span>
+        <span class="marquee__pill">Kohl's</span>
+        <span class="marquee__pill">Macy's</span>
+        <span class="marquee__pill">Walgreens</span>
+        <span class="marquee__pill">CVS</span>
+        <span class="marquee__pill">Gap</span>
+        <span class="marquee__pill">Samsung</span>
+        <span class="marquee__pill marquee__pill--soon" aria-hidden="true">More coming soon</span>
       </div>
     </div>
+  </section>
 
-    <div class="feature-card">
-      <div class="feature-card__screenshot">
-        <img src="assets/feature-intervention.png" alt="Pocketlens cooldown reminder on a checkout page" loading="lazy" />
-      </div>
-      <div class="feature-card__body">
-        <p class="feature-card__tag">02 — Intervention</p>
-        <h3 class="feature-card__title">A reminder, right when it matters.</h3>
-        <p class="feature-card__desc">
-          Add any site to your blocklist and Pocketlens
-          steps in the moment you land on it - a clear
-          reminder asking if you really need to shop right
-          now. Not a notification you can swipe away without
-          reading. Something you have to actually look at.
-        </p>
+  <!-- PLUS — hero (off-white) -->
+  <section class="plus-hero" id="plus">
+    <div class="plus__inner">
+      <div class="plus__top">
+        <div class="plus__copy">
+          <p class="plus__eyebrow">Pocketlens Plus</p>
+          <h2 class="plus__headline">The 30-second rule,<br /><em>for many more stores.</em></h2>
+          <p class="plus__sub">
+            Free covers Amazon, Walmart and Target. Plus brings the
+            same pause everywhere else you check out — named
+            retailers and anywhere our detector recognizes a cart.
+          </p>
+          <div class="plus__cta-row">
+            <a
+              href="https://chromewebstore.google.com/detail/pocketlens/boidjclblajoehokcfknaajadjjhoaab"
+              class="btn-primary"
+              data-pocketlens-upgrade
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="pl-if-installed">Get Plus</span>
+              <span class="pl-if-not-installed">Add Pocketlens to Chrome first</span>
+            </a>
+            <span class="plus__price">
+              <span class="plus__price-amount">$3.99 / month</span>
+              <span class="plus__price-note">Founding price · cancel any time</span>
+            </span>
+            <p class="plus__install-note pl-if-not-installed">
+              You upgrade from inside Pocketlens. Already installed? Refresh this page.
+            </p>
+          </div>
+        </div>
+
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 240 240">
+            <line class="spoke spoke--free" x1="120.0" y1="42.0" x2="120.0" y2="12.0" />
+            <line class="spoke spoke--free" x1="139.4" y1="44.5" x2="146.9" y2="15.4" />
+            <line class="spoke spoke--free" x1="157.6" y1="51.6" x2="172.0" y2="25.4" />
+            <line class="spoke" x1="173.4" y1="63.1" x2="193.9" y2="41.3" />
+            <line class="spoke" x1="185.9" y1="78.2" x2="211.2" y2="62.1" />
+            <line class="spoke" x1="194.2" y1="95.9" x2="222.7" y2="86.6" />
+            <line class="spoke" x1="197.8" y1="115.1" x2="227.8" y2="113.2" />
+            <line class="spoke" x1="196.6" y1="134.6" x2="226.1" y2="140.2" />
+            <line class="spoke" x1="190.6" y1="153.2" x2="217.7" y2="166.0" />
+            <line class="spoke" x1="180.1" y1="169.7" x2="203.2" y2="188.8" />
+            <line class="spoke" x1="165.8" y1="183.1" x2="183.5" y2="207.4" />
+            <line class="spoke" x1="148.7" y1="192.5" x2="159.8" y2="220.4" />
+            <line class="spoke" x1="129.8" y1="197.4" x2="133.5" y2="227.1" />
+            <line class="spoke" x1="110.2" y1="197.4" x2="106.5" y2="227.1" />
+            <line class="spoke" x1="91.3" y1="192.5" x2="80.2" y2="220.4" />
+            <line class="spoke" x1="74.2" y1="183.1" x2="56.5" y2="207.4" />
+            <line class="spoke" x1="59.9" y1="169.7" x2="36.8" y2="188.8" />
+            <line class="spoke" x1="49.4" y1="153.2" x2="22.3" y2="166.0" />
+            <line class="spoke" x1="43.4" y1="134.6" x2="13.9" y2="140.2" />
+            <line class="spoke" x1="42.2" y1="115.1" x2="12.2" y2="113.2" />
+            <line class="spoke" x1="45.8" y1="95.9" x2="17.3" y2="86.6" />
+            <line class="spoke" x1="54.1" y1="78.2" x2="28.8" y2="62.1" />
+            <line class="spoke" x1="66.6" y1="63.1" x2="46.1" y2="41.3" />
+            <line class="spoke" x1="82.4" y1="51.6" x2="68.0" y2="25.4" />
+            <line class="spoke" x1="100.6" y1="44.5" x2="93.1" y2="15.4" />
+            <circle cx="120" cy="120" r="62" fill="var(--dark-card)" />
+            <text x="120" y="122" text-anchor="middle" class="ring-count">+</text>
+            <text x="120" y="144" text-anchor="middle" class="ring-label">and counting</text>
+          </svg>
+          <div class="ring-legend">
+            <span class="ring-legend__item"><span class="ring-legend__dot ring-legend__dot--free"></span>3 free, always</span>
+            <span class="ring-legend__item"><span class="ring-legend__dot ring-legend__dot--plus"></span>Plus: everywhere else</span>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="feature-card">
-      <div class="feature-card__screenshot">
-        <img src="assets/feature-awareness.png" alt="Pocketlens purchase history with mood tags" loading="lazy" />
-      </div>
-      <div class="feature-card__body">
-        <p class="feature-card__tag">03 — Cooldown</p>
-        <h3 class="feature-card__title">Thirty seconds before you spend.</h3>
-        <p class="feature-card__desc">
-          Sit on a checkout page for 30 seconds and
-          Pocketlens asks one simple question: still sure?
-          A short pause is often enough to break an impulse
-          purchase. That pause is now built into your browser.
+  <!-- PLUS — coverage card (dark) -->
+  <section class="plus-coverage-section">
+    <div class="plus__inner">
+      <div class="coverage-head">
+        <p class="coverage-head__title">One pause, everywhere you shop.</p>
+        <p class="coverage-head__sub">
+          3 stores are covered free, always. Plus follows you to the
+          rest — named retailers below, plus anywhere else our
+          detector recognizes a checkout. Hover the card to see it unlock.
         </p>
       </div>
+
+      <div class="coverage" tabindex="0">
+        <div class="coverage__bar-row">
+          <span>3 free, always</span>
+          <span>Hover to see what Plus unlocks</span>
+        </div>
+        <div class="coverage__bar">
+          <div class="coverage__bar-fill"></div>
+        </div>
+        <div class="coverage__grid">
+          <span class="store-chip store-chip--free" style="transition-delay:0ms">Amazon</span>
+          <span class="store-chip store-chip--free" style="transition-delay:12ms">Walmart</span>
+          <span class="store-chip store-chip--free" style="transition-delay:24ms">Target</span>
+          <span class="store-chip" style="transition-delay:36ms">eBay</span>
+          <span class="store-chip" style="transition-delay:48ms">Best Buy</span>
+          <span class="store-chip" style="transition-delay:60ms">Nike</span>
+          <span class="store-chip" style="transition-delay:72ms">Etsy</span>
+          <span class="store-chip" style="transition-delay:84ms">Home Depot</span>
+          <span class="store-chip" style="transition-delay:96ms">Chewy</span>
+          <span class="store-chip" style="transition-delay:108ms">Lowe's</span>
+          <span class="store-chip" style="transition-delay:120ms">Kohl's</span>
+          <span class="store-chip" style="transition-delay:132ms">Macy's</span>
+          <span class="store-chip" style="transition-delay:144ms">Walgreens</span>
+          <span class="store-chip" style="transition-delay:156ms">CVS</span>
+          <span class="store-chip" style="transition-delay:168ms">Gap</span>
+          <span class="store-chip" style="transition-delay:180ms">Samsung</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:192ms">Apple Store*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:204ms">Zara*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:216ms">H&amp;M*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:228ms">Wayfair*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:240ms">Costco*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:252ms">Sam's Club*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:264ms">Sephora*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:276ms">Amazon Fresh*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:288ms">Nordstrom*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:300ms">Adidas*</span>
+          <span class="store-chip store-chip--beta" style="transition-delay:312ms">Puma*</span>
+          <span class="store-chip store-chip--more" style="transition-delay:324ms">+ anywhere else*</span>
+        </div>
+      </div>
+      <p class="coverage__hint">
+        Named retailers above are confirmed working. Starred (*) stores
+        are Beta — not yet individually tested, but still covered by our
+        fallback detector, with the same cooldowns and limits.
+      </p>
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- PLUS — roadmap + closing CTA (off-white) -->
+  <section class="plus-roadmap-section">
+    <div class="plus__inner">
+      <div class="plus__roadmap">
+        <div class="roadmap__intro">
+          <p class="roadmap__eyebrow">Coming soon</p>
+          <h3 class="roadmap__title">Where Plus<br />is headed</h3>
+        </div>
+        <div class="roadmap__grid">
+          <div class="roadmap__item">
+            <span class="roadmap__bullet"></span>
+            <div>
+              <p class="roadmap__item-title">Spending Personality</p>
+              <p class="roadmap__item-desc">"The Late Night Shopper," "The Considered Spender" — a shareable read on how you buy.</p>
+            </div>
+          </div>
+          <div class="roadmap__item">
+            <span class="roadmap__bullet"></span>
+            <div>
+              <p class="roadmap__item-title">Monthly Wrapped</p>
+              <p class="roadmap__item-desc">A shareable card with your spend, your mood breakdown, and your regret rate.</p>
+            </div>
+          </div>
+          <div class="roadmap__item">
+            <span class="roadmap__bullet"></span>
+            <div>
+              <p class="roadmap__item-title">Regret Calculator</p>
+              <p class="roadmap__item-desc">Your regret-tagged total, converted into something real — like a flight to Europe.</p>
+            </div>
+          </div>
+          <div class="roadmap__item">
+            <span class="roadmap__bullet"></span>
+            <div>
+              <p class="roadmap__item-title">Impulse Audit</p>
+              <p class="roadmap__item-desc">A monthly breakdown of late-night purchases, with mood tags and regret rate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <!-- EMAIL CAPTURE — white -->
+      <div class="plus-cta">
+        <div>
+          <p class="plus-cta__headline">Pause before every checkout.</p>
+          <p class="plus-cta__sub">$3.99 / month · Secure checkout by Stripe · Cancel any time</p>
+        </div>
+        <a
+          href="https://chromewebstore.google.com/detail/pocketlens/boidjclblajoehokcfknaajadjjhoaab"
+          class="btn-offwhite"
+          data-pocketlens-upgrade
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="pl-if-installed">Upgrade to Plus</span>
+          <span class="pl-if-not-installed">Add Pocketlens to Chrome first</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EMAIL CAPTURE — more updates on the way -->
   <section class="capture">
     <p class="capture__eyebrow">Coming soon</p>
-    <h2 class="capture__headline">Many updates on the way.</h2>
+    <h2 class="capture__headline">Many more updates on the way.</h2>
     <p class="capture__sub">
-      The Chrome extension is just the beginning.
-      Join the waitlist and be first to know about major updates.
+      The Chrome extension is just the beginning. Join the waitlist
+      and be first to hear about the mobile app and everything after it.
     </p>
-    <!--
-      REPLACE WITH YOUR Kit EMBED CODE
-      Kit → Audience → Signup forms → Embedded forms
-    -->
     <script async data-uid="9d591c1465" src="https://getpocketlens.kit.com/9d591c1465/index.js"></script>
     <p class="capture__disclaimer">No spam. Just Pocketlens updates.</p>
   </section>
@@ -781,6 +1610,8 @@
     </div>
     <div class="footer__center">
       <a href="/privacy" class="footer__link">Privacy Policy</a>
+      <span class="footer__sep" aria-hidden="true">·</span>
+      <a href="/terms" class="footer__link">Terms of Service</a>
     </div>
     <div class="footer__right">
       <a href="mailto:hello@getpocketlens.com" class="footer__link">
@@ -789,6 +1620,44 @@
       <span class="footer__copy">© 2026 Pocketlens LLC</span>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var viewport = document.getElementById('carouselViewport');
+      var track = document.getElementById('carouselTrack');
+      var prevBtn = document.getElementById('carouselPrev');
+      var nextBtn = document.getElementById('carouselNext');
+      var cards = Array.prototype.slice.call(track.children);
+
+      function cardStep() {
+        var card = cards[0];
+        var style = window.getComputedStyle(track);
+        var gap = parseFloat(style.columnGap || style.gap || 24);
+        return card.getBoundingClientRect().width + gap;
+      }
+
+      function updateUI() {
+        var maxScroll = viewport.scrollWidth - viewport.clientWidth - 2;
+        prevBtn.disabled = viewport.scrollLeft <= 2;
+        nextBtn.disabled = viewport.scrollLeft >= maxScroll;
+      }
+
+      prevBtn.addEventListener('click', function () {
+        viewport.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', function () {
+        viewport.scrollBy({ left: cardStep(), behavior: 'smooth' });
+      });
+
+      viewport.addEventListener('scroll', function () {
+        window.requestAnimationFrame(updateUI);
+      });
+
+      window.addEventListener('resize', updateUI);
+      updateUI();
+    })();
+  </script>
 
 </body>
 </html>
