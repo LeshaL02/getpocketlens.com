@@ -271,13 +271,13 @@
 
       <p class="doc__meta">
         <span><strong>Effective date:</strong> October 31, 2026</span>
-        <span><strong>Last updated:</strong> November 4, 2026</span>
-        <span><strong>Version:</strong> 2.1 – Applies to Pocketlens version 1.1.0 and later.</span>
+        <span><strong>Last updated:</strong> November 5, 2026</span>
+        <span><strong>Version:</strong> 2.2 – Applies to Pocketlens version 1.1.0 and later.</span>
       </p>
 
       <div class="short">
         <p class="short__label">The short version</p>
-        <p>Your spending data (purchases, limits, mood tags, history) stays on your device. We never see it. Pocketlens uses a randomly generated install ID to check whether you have a Plus subscription; this check happens for all users, free and paid. If you upgrade, Stripe handles your payment and collects your name, email, and card details, and Stripe also keeps your install ID with your subscription so the payment can be matched to your install. As the merchant, we can see your name and email in our Stripe account, as any business using Stripe can, but our own database stores only your install ID, a Stripe Customer ID, and your subscription status. If you reinstall the extension, you can reconnect your subscription with the email you used at checkout; we check it against Stripe at that moment, and what you type into that form is never stored or logged. We also collect anonymous reports on whether purchase detection worked at a given store, with no identifier attached. If you uninstall, you can optionally tell us why through a short anonymous form on our website. We do not sell your data. Ever.</p>
+        <p>Your spending data (purchases, limits, mood tags, history) stays on your device. We never see it. Pocketlens uses a randomly generated install ID to check whether you have a Plus subscription; this check happens for all users, free and paid. If you upgrade, your purchase is sold through Link, Stripe's consumer platform. Link and Stripe handle your payment and collect your name, email, billing address, and card details, and Stripe also keeps your install ID with your subscription so the payment can be matched to your install. We can see your name and email in our Stripe account, as any business using Stripe can, but our own database stores only your install ID, a Stripe Customer ID, and your subscription status. If you reinstall the extension, you can reconnect your subscription with the email you used at checkout; we check it against Stripe at that moment, and what you type into that form is never stored or logged. We also collect anonymous reports on whether purchase detection worked at a given store, with no identifier attached. If you uninstall, you can optionally tell us why through a short anonymous form on our website. We do not sell your data. Ever.</p>
       </div>
 
       <section id="s1">
@@ -305,16 +305,16 @@
         <p>Pocketlens sends this install ID to our server (api.getpocketlens.com) when it checks whether your install has an active Plus subscription, and when you start a checkout, open the billing page, or use Restore Purchase. Subscription checks happen periodically for all users, free and paid. The install ID travels inside the body of an encrypted (HTTPS) request, not in the web address. The server replies "free" or "plus," and the result is cached on your device so we don't ask on every use. If our server can't be reached, the extension relies on the cached result: a cached Plus result keeps working for up to 7 days after the last successful check.</p>
         <p>If you uninstall and reinstall the extension, a new install ID is generated and your install will appear as a new free user until you restore your subscription (see <a href="#s2-e">Section E</a>).</p>
         <h3 id="s2-c"><span class="num">C.</span> Data collected when you upgrade to Pocketlens Plus</h3>
-        <p>When you subscribe, you are taken to a checkout page hosted by Stripe Inc., a PCI DSS Level 1 certified payment processor. Stripe collects your name, email address, card details, and billing details directly. Stripe's handling of that data is governed by its own privacy policy: <a href="https://stripe.com/privacy">stripe.com/privacy</a></p>
-        <p>When checkout starts, we pass your install ID to Stripe so we can match your payment to your install. Stripe stores it on the checkout record and on your subscription. We never see or store your card details. As the merchant, we do have access to your name and email through our Stripe account, as any business that uses Stripe does for its customers. That information lives in Stripe; it is not copied into our own database. Our own database stores only:</p>
+        <p>When you subscribe, you are taken to a checkout page hosted by Stripe Inc., a PCI DSS Level 1 certified payment processor. Pocketlens Plus is sold through Link, LLC (Link is Stripe's consumer platform), which acts as the seller (merchant of record) for your purchase. Link and Stripe collect your name, email address, billing address, card details, and other billing details directly, and calculate any sales tax. Their handling of that data is governed by their own privacy policies: <a href="https://stripe.com/privacy">stripe.com/privacy</a>, and Link's privacy policy, available at <a href="https://link.com">link.com</a>.</p>
+        <p>When checkout starts, we pass your install ID to Stripe so we can match your payment to your install. Stripe stores it on the checkout record and on your subscription. We never see or store your card details. We do have access to your name and email through our Stripe account, as any business that uses Stripe does for its customers. That information lives in Stripe; it is not copied into our own database. Our own database stores only:</p>
         <ul>
           <li>Your install ID</li>
           <li>A Stripe Customer ID (a token, not your card details, name, or email)</li>
           <li>Your subscription status (for example active, past due, or cancelled)</li>
         </ul>
-        <p>For customer support, we may look up your name, email, and subscription details inside Stripe's dashboard. Stripe sends your payment receipts (including each monthly renewal) and emails about failed payments or expiring cards directly.</p>
+        <p>For customer support, we may look up your name, email, and subscription details inside Stripe's dashboard. Link sends your receipts, refund confirmations, and subscription-related emails directly. Link may offer you an optional Link account to manage your purchase.</p>
         <h3 id="s2-d"><span class="num">D.</span> Managing or cancelling your subscription</h3>
-        <p>Plus subscribers can open a secure, Stripe-hosted page from within the extension to update a payment method, view invoices, or cancel. That page is provided by Stripe; we don't see or store anything you do there beyond the subscription status Stripe reports to us. If you cancel, Plus access continues until the end of your current billing period, after which we are notified automatically and your install reverts to the free tier.</p>
+        <p>Plus subscribers can open a secure, Stripe-hosted page from within the extension to update a payment method, view invoices, or cancel. That page is provided by Stripe; we don't see or store anything you do there beyond the subscription status Stripe reports to us. If you cancel, Plus access continues until the end of your current billing period, after which we are notified automatically and your install reverts to the free tier. You can also manage or cancel your subscription in your Link account at <a href="https://link.com">link.com</a>, and get help with payments from Link support.</p>
         <h3 id="s2-e"><span class="num">E.</span> Restoring a Plus subscription</h3>
         <p>If you reinstall Pocketlens, your install ID is erased, which disconnects you from your subscription. To reconnect it, enter the email you used at checkout.</p>
         <p>That email is sent to our server at the moment you submit it, and is used only to ask Stripe whether an active subscription exists for that address. It is never stored in our database or written to our server logs. If Stripe confirms an active subscription, we link it to your new install ID in our database and update your subscription in Stripe with the new install ID. If no match is found, nothing is saved. Separately, because Stripe collected your email when you first checked out, it already exists in our Stripe account as part of your customer record, whether or not you ever use Restore Purchase (see <a href="#s2-c">Section C</a>).</p>
@@ -340,7 +340,7 @@
         <h2><span class="num">3.</span> What Data We Do Not Collect</h2>
         <ul>
           <li>Your spending data, purchase history, amounts, or mood tags (these never leave your device)</li>
-          <li>Your name, email address, or billing information in our own database (these are held by Stripe, and we can view your name and email in our Stripe account, as described in <a href="#s2-c">Section C</a>)</li>
+          <li>Your name, email address, or billing information in our own database (these are held by Stripe and Link, and we can view your name and email in our Stripe account, as described in <a href="#s2-c">Section C</a>)</li>
           <li>Credit card information of any kind</li>
           <li>The email you enter for Restore Purchase, in our database or our server logs</li>
           <li>Your name or email through the uninstall feedback form (it doesn't ask for them)</li>
@@ -370,11 +370,12 @@
         <p>We do not sell, rent, or trade your data. We use these service providers to operate Pocketlens:</p>
         <ul>
           <li><strong>Stripe Inc.</strong> — payment processing and subscription billing. Stripe receives your install ID at checkout and after a Restore Purchase. During a Restore Purchase request, the email you enter is also sent to Stripe for verification.</li>
+          <li><strong>Link, LLC</strong> — sells Pocketlens Plus as the merchant of record: processes your payment, handles any sales tax, sends receipts, and provides payment support.</li>
           <li><strong>Supabase</strong> — database hosting for our subscription records, detection reports, and uninstall feedback.</li>
           <li><strong>Railway</strong> — hosting for our server (api.getpocketlens.com).</li>
           <li><strong>GitHub (GitHub Pages)</strong> — hosting for our website, including the uninstall feedback page.</li>
         </ul>
-        <p>These providers process data on our behalf under their own terms and privacy policies. We may also disclose information if required by law, court order, or government authority.</p>
+        <p>These providers process data under their own terms and privacy policies. We may also disclose information if required by law, court order, or government authority.</p>
       </section>
 
       <section id="s6">
@@ -397,7 +398,7 @@
         <ul>
           <li><strong>Local data</strong> persists until you uninstall the extension or clear Chrome storage. We have no copy of it.</li>
           <li><strong>Subscription records</strong> (install ID, Stripe Customer ID, status) are kept while your subscription is active and for 90 days after cancellation, for legal and accounting purposes.</li>
-          <li><strong>Stripe records</strong> (including your install ID on your checkout and subscription) are kept by Stripe under its own retention rules, including records it must keep by law.</li>
+          <li><strong>Stripe and Link records</strong> (including your install ID on your checkout and subscription in Stripe) are kept by Stripe and Link under their own retention rules, including records they must keep by law.</li>
           <li><strong>Detection reports</strong> are anonymous and cannot be tied to you, so they cannot be individually deleted. We retain them for as long as they are useful for monitoring store integrations.</li>
           <li><strong>Uninstall feedback</strong> is anonymous and cannot be tied to you, so it cannot be individually deleted. We retain it for as long as it is useful for improving Pocketlens.</li>
           <li><strong>Restore Purchase emails</strong> are never stored.</li>
@@ -422,7 +423,7 @@
           <li><strong>Access</strong> — request a copy of the data we hold about you.</li>
           <li><strong>Correction</strong> — request correction of inaccurate data.</li>
           <li><strong>Deletion</strong> — request deletion of your account data at any time (see <a href="#s8">Section 8</a>).</li>
-          <li><strong>Cancellation</strong> — cancel your Plus subscription at any time from within the extension, or by contacting us.</li>
+          <li><strong>Cancellation</strong> — cancel your Plus subscription at any time from within the extension, in your Link account at <a href="https://link.com">link.com</a>, or by contacting us.</li>
         </ul>
       </section>
 
@@ -449,7 +450,7 @@
   <footer>
     <img src="assets/icon48.png" alt="Pocketlens" class="footer__logo" />
     <p class="footer__company">Pocketlens LLC · Minnesota, United States</p>
-    <p class="footer__version">Pocketlens LLC · Privacy Policy v2.1 · <em>Spend with purpose</em></p>
+    <p class="footer__version">Pocketlens LLC · Privacy Policy v2.2 · <em>Spend with purpose</em></p>
   </footer>
 
 </body>
